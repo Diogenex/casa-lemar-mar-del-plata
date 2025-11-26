@@ -6,7 +6,7 @@ import logo from "@/assets/logo.jpeg";
 import { useState } from "react";
 
 const Contact = () => {
-  const whatsappNumber = "5492233000000"; // Replace with actual number
+  const whatsappNumber = "5492235959372"; // Replace with actual number
   const [formData, setFormData] = useState({
     name: "",
     email: "",
