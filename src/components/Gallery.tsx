@@ -1,17 +1,35 @@
 import { useState } from "react";
 import gallery1 from "@/assets/gallery-1.jpeg";
 import gallery2 from "@/assets/gallery-2.jpeg";
+import galleryExterior1 from "@/assets/gallery-exterior-1.jpeg";
+import galleryExterior2 from "@/assets/gallery-exterior-2.jpeg";
+import galleryKitchen1 from "@/assets/gallery-kitchen-1.jpeg";
+import galleryKitchen2 from "@/assets/gallery-kitchen-2.jpeg";
+import galleryLiving from "@/assets/gallery-living.jpeg";
+import galleryBedroom1 from "@/assets/gallery-bedroom-1.jpeg";
+import galleryBedroom2 from "@/assets/gallery-bedroom-2.jpeg";
+import galleryBedroom3 from "@/assets/gallery-bedroom-3.jpeg";
+import galleryBathroom from "@/assets/gallery-bathroom.jpeg";
+import galleryInterior1 from "@/assets/gallery-interior-1.jpeg";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { X } from "lucide-react";
 
 const Gallery = () => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
-  // These would be individual images from the collages
-  // For now using the collage images
   const images = [
-    { src: gallery1, alt: "Vista de la casa y espacios" },
-    { src: gallery2, alt: "Ambientes y cercanías" },
+    { src: galleryExterior1, alt: "Fachada de CASA LeMar" },
+    { src: galleryExterior2, alt: "Entrada de la casa" },
+    { src: galleryKitchen1, alt: "Cocina-comedor integrado" },
+    { src: galleryKitchen2, alt: "Vista de la cocina" },
+    { src: galleryLiving, alt: "Living comedor" },
+    { src: galleryBedroom1, alt: "Dormitorio matrimonial" },
+    { src: galleryBedroom2, alt: "Dormitorio con cucheta" },
+    { src: galleryBedroom3, alt: "Dormitorio con camas" },
+    { src: galleryBathroom, alt: "Baño completo" },
+    { src: galleryInterior1, alt: "Detalles del interior" },
+    { src: gallery1, alt: "Espacios de la casa" },
+    { src: gallery2, alt: "Cercanías y alrededores" },
   ];
 
   return (
@@ -26,7 +44,7 @@ const Gallery = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
           {images.map((image, index) => (
             <div
               key={index}

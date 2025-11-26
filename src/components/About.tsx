@@ -10,7 +10,7 @@ const About = () => {
               Tu Casa en <span className="text-primary">Mar del Plata</span>
             </h2>
             <p className="text-lg text-muted-foreground">
-              Ubicada en el barrio de Villa Lourdes, CASA LeMar es el lugar perfecto para tus vacaciones
+              Ubicada en el barrio de Villa Lourdes, cerca del mar. CASA LeMar es el lugar perfecto para tus vacaciones
             </p>
           </div>
 
