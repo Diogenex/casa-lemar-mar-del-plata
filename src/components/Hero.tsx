@@ -1,10 +1,30 @@
 import { Button } from "@/components/ui/button";
 import { MessageCircle } from "lucide-react";
 import logo from "@/assets/logo.jpeg";
+import { useEffect, useState } from "react";
+import useEmblaCarousel from "embla-carousel-react";
+import Autoplay from "embla-carousel-autoplay";
+import galleryExterior1 from "@/assets/gallery-exterior-1.jpeg";
+import galleryExterior2 from "@/assets/gallery-exterior-2.jpeg";
+import galleryLiving from "@/assets/gallery-living.jpeg";
+import galleryKitchen1 from "@/assets/gallery-kitchen-1.jpeg";
+import galleryBedroom1 from "@/assets/gallery-bedroom-1.jpeg";
 
 const Hero = () => {
-  const whatsappNumber = "5492235959372"; // Replace with actual number
+  const whatsappNumber = "5492235959372";
   const whatsappMessage = "Hola! Me interesa consultar disponibilidad en CASA LeMar.";
+
+  const heroImages = [
+    galleryExterior1,
+    galleryExterior2,
+    galleryLiving,
+    galleryKitchen1,
+    galleryBedroom1,
+  ];
+
+  const [emblaRef] = useEmblaCarousel({ loop: true }, [
+    Autoplay({ delay: 5000, stopOnInteraction: false }),
+  ]);
 
   const handleWhatsAppClick = () => {
     window.open(
@@ -15,11 +35,24 @@ const Hero = () => {
 
   return (
     <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background with gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-ocean-light/20 via-background to-sand z-0" />
+      {/* Background Carousel */}
+      <div className="absolute inset-0 overflow-hidden" ref={emblaRef}>
+        <div className="flex h-full">
+          {heroImages.map((image, index) => (
+            <div key={index} className="flex-[0_0_100%] min-w-0 relative">
+              <img
+                src={image}
+                alt={`CASA LeMar - Imagen ${index + 1}`}
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/70 to-background/90" />
+            </div>
+          ))}
+        </div>
+      </div>
       
-      {/* Animated background pattern */}
-      <div className="absolute inset-0 opacity-5">
+      {/* Animated accent elements */}
+      <div className="absolute inset-0 opacity-5 pointer-events-none">
         <div className="absolute top-20 left-10 w-64 h-64 bg-ocean rounded-full blur-3xl animate-pulse" />
         <div className="absolute bottom-20 right-10 w-96 h-96 bg-primary rounded-full blur-3xl animate-pulse delay-1000" />
       </div>
