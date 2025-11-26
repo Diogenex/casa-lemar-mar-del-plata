@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { MessageCircle } from "lucide-react";
+import logo from "@/assets/logo.jpeg";
 
 const Hero = () => {
   const whatsappNumber = "5492235959372"; // Replace with actual number
@@ -26,9 +27,9 @@ const Hero = () => {
       {/* Content */}
       <div className="container mx-auto px-4 z-10 pt-20">
         <div className="max-w-4xl mx-auto text-center animate-fade-in">
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 text-foreground">
-            CASA <span className="text-primary">LeMar</span>
-          </h1>
+          <div className="flex justify-center mb-6">
+            <img src={logo} alt="CASA LeMar" className="h-32 md:h-40 w-auto" />
+          </div>
           <p className="text-xl md:text-2xl text-muted-foreground mb-4 font-light">
             Alquiler Temporario en Mar del Plata
           </p>
