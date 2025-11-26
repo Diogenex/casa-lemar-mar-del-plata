@@ -33,6 +33,7 @@ const Navigation = () => {
     { label: "Galería", id: "gallery" },
     { label: "Comodidades", id: "amenities" },
     { label: "Disponibilidad", id: "disponibilidad" },
+    { label: "Condiciones", id: "condiciones" },
     { label: "Ubicación", id: "location" },
     { label: "Testimonios", id: "testimonials" },
     { label: "Contacto", id: "contact" },

@@ -12,10 +12,11 @@ import galleryBedroom3 from "@/assets/gallery-bedroom-3.jpeg";
 import galleryBathroom from "@/assets/gallery-bathroom.jpeg";
 import galleryInterior1 from "@/assets/gallery-interior-1.jpeg";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
-import { X } from "lucide-react";
+import { X, ChevronLeft, ChevronRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const Gallery = () => {
-  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(null);
 
   const images = [
     { src: galleryExterior1, alt: "Fachada de CASA LeMar" },
@@ -31,6 +32,26 @@ const Gallery = () => {
     { src: gallery1, alt: "Espacios de la casa" },
     { src: gallery2, alt: "Cercanías y alrededores" },
   ];
+
+  const handlePrevious = () => {
+    if (selectedImageIndex !== null) {
+      setSelectedImageIndex((selectedImageIndex - 1 + images.length) % images.length);
+    }
+  };
+
+  const handleNext = () => {
+    if (selectedImageIndex !== null) {
+      setSelectedImageIndex((selectedImageIndex + 1) % images.length);
+    }
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === "ArrowLeft") {
+      handlePrevious();
+    } else if (e.key === "ArrowRight") {
+      handleNext();
+    }
+  };
 
   return (
     <section id="gallery" className="py-20 bg-background">
@@ -49,7 +70,7 @@ const Gallery = () => {
             <div
               key={index}
               className="relative group cursor-pointer overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500"
-              onClick={() => setSelectedImage(image.src)}
+              onClick={() => setSelectedImageIndex(index)}
             >
               <img
                 src={image.src}
@@ -65,22 +86,52 @@ const Gallery = () => {
         </div>
       </div>
 
-      {/* Image Modal */}
-      <Dialog open={!!selectedImage} onOpenChange={() => setSelectedImage(null)}>
-        <DialogContent className="max-w-7xl w-full p-0 overflow-hidden bg-transparent border-none">
+      {/* Image Modal with Navigation */}
+      <Dialog open={selectedImageIndex !== null} onOpenChange={() => setSelectedImageIndex(null)}>
+        <DialogContent 
+          className="max-w-7xl w-full p-0 overflow-hidden bg-transparent border-none"
+          onKeyDown={handleKeyDown}
+        >
           <div className="relative">
             <button
-              onClick={() => setSelectedImage(null)}
+              onClick={() => setSelectedImageIndex(null)}
               className="absolute top-4 right-4 z-50 p-2 bg-background/80 backdrop-blur-sm rounded-full hover:bg-background transition-colors"
             >
               <X className="h-6 w-6" />
             </button>
-            {selectedImage && (
-              <img
-                src={selectedImage}
-                alt="Vista ampliada"
-                className="w-full h-auto max-h-[90vh] object-contain"
-              />
+            
+            {/* Navigation Buttons */}
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={handlePrevious}
+              className="absolute left-4 top-1/2 -translate-y-1/2 z-50 h-12 w-12 bg-background/80 backdrop-blur-sm rounded-full hover:bg-background transition-colors"
+            >
+              <ChevronLeft className="h-8 w-8" />
+            </Button>
+            
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={handleNext}
+              className="absolute right-4 top-1/2 -translate-y-1/2 z-50 h-12 w-12 bg-background/80 backdrop-blur-sm rounded-full hover:bg-background transition-colors"
+            >
+              <ChevronRight className="h-8 w-8" />
+            </Button>
+
+            {selectedImageIndex !== null && (
+              <div className="relative">
+                <img
+                  src={images[selectedImageIndex].src}
+                  alt={images[selectedImageIndex].alt}
+                  className="w-full h-auto max-h-[90vh] object-contain"
+                />
+                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-background/80 backdrop-blur-sm px-4 py-2 rounded-full">
+                  <p className="text-sm font-medium">
+                    {selectedImageIndex + 1} / {images.length}
+                  </p>
+                </div>
+              </div>
             )}
           </div>
         </DialogContent>
