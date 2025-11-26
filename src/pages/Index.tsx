@@ -5,6 +5,7 @@ import Gallery from "@/components/Gallery";
 import Amenities from "@/components/Amenities";
 import BookingCalendar from "@/components/BookingCalendar";
 import Location from "@/components/Location";
+import Testimonials from "@/components/Testimonials";
 import Contact from "@/components/Contact";
 import WhatsAppButton from "@/components/WhatsAppButton";
 
@@ -18,6 +19,7 @@ const Index = () => {
       <Amenities />
       <BookingCalendar />
       <Location />
+      <Testimonials />
       <Contact />
       <WhatsAppButton />
     </div>

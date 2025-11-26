@@ -1,12 +1,22 @@
 import { Button } from "@/components/ui/button";
-import { MessageCircle, Mail, MapPin } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { MessageCircle, Mail, MapPin, Send } from "lucide-react";
 import logo from "@/assets/logo.jpeg";
+import { useState } from "react";
 
 const Contact = () => {
   const whatsappNumber = "5492233000000"; // Replace with actual number
-  const whatsappMessage = "Hola! Me gustaría obtener más información sobre CASA LeMar.";
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    message: ""
+  });
 
-  const handleWhatsAppClick = () => {
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const whatsappMessage = `Hola! Soy ${formData.name}.\n\nEmail: ${formData.email}\nTeléfono: ${formData.phone}\n\nMensaje: ${formData.message}`;
     window.open(
       `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`,
       "_blank"
@@ -65,19 +75,80 @@ const Contact = () => {
               </div>
             </div>
 
-            <div className="text-center">
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <div className="grid md:grid-cols-2 gap-6">
+                <div>
+                  <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">
+                    Nombre completo *
+                  </label>
+                  <Input
+                    id="name"
+                    type="text"
+                    required
+                    placeholder="Tu nombre"
+                    value={formData.name}
+                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                    className="w-full"
+                  />
+                </div>
+                
+                <div>
+                  <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2">
+                    Email *
+                  </label>
+                  <Input
+                    id="email"
+                    type="email"
+                    required
+                    placeholder="tu@email.com"
+                    value={formData.email}
+                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                    className="w-full"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label htmlFor="phone" className="block text-sm font-medium text-foreground mb-2">
+                  Teléfono
+                </label>
+                <Input
+                  id="phone"
+                  type="tel"
+                  placeholder="+54 9 11 1234-5678"
+                  value={formData.phone}
+                  onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                  className="w-full"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="message" className="block text-sm font-medium text-foreground mb-2">
+                  Mensaje *
+                </label>
+                <Textarea
+                  id="message"
+                  required
+                  placeholder="Cuéntanos sobre tu consulta, fechas de interés, cantidad de personas..."
+                  value={formData.message}
+                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                  className="w-full min-h-[120px]"
+                />
+              </div>
+
               <Button
+                type="submit"
                 size="lg"
-                className="text-lg px-8 py-6 rounded-full bg-primary hover:bg-ocean-dark transition-all duration-300 shadow-lg hover:shadow-xl w-full md:w-auto"
-                onClick={handleWhatsAppClick}
+                className="text-lg px-8 py-6 rounded-full bg-primary hover:bg-ocean-dark transition-all duration-300 shadow-lg hover:shadow-xl w-full"
               >
-                <MessageCircle className="mr-2 h-5 w-5" />
-                Contactar por WhatsApp
+                <Send className="mr-2 h-5 w-5" />
+                Enviar consulta por WhatsApp
               </Button>
-              <p className="text-sm text-muted-foreground mt-4">
-                Te respondemos rápidamente para ayudarte con tu reserva
+              
+              <p className="text-sm text-muted-foreground text-center">
+                Tu mensaje se abrirá en WhatsApp para que puedas enviarlo
               </p>
-            </div>
+            </form>
           </div>
 
           <div className="mt-8 text-center text-sm text-muted-foreground">
