@@ -1,1 +1,4 @@
 project_id = "ljkmrcecnjdvfbpyhjic"
+
+[functions.fetch-calendar]
+verify_jwt = false
